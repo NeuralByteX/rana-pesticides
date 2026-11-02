@@ -1,0 +1,50 @@
+-- Rana Pesticides: sample catalogue (run AFTER 01_schema.sql). Safe to skip if you will add your own products in Admin.
+-- Prices are placeholders from the prototype - replace them with real prices in Admin > Products.
+do $$
+declare pid bigint; kid bigint;
+begin
+if exists (select 1 from public.products) then raise notice 'Products already exist - seed skipped'; return; end if;
+insert into public.products (category_id, brand, name_en) values ((select id from public.categories where name_en = 'Fertilizers'), 'IFFCO', 'Urea (46% N) Nitrogen Fertilizer') returning id into pid;
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '45 kg', 320, 300) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 275);
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '5 kg', 60, 55) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 50);
+insert into public.products (category_id, brand, name_en) values ((select id from public.categories where name_en = 'Fertilizers'), 'IFFCO', 'DAP 18-46-0 Granular Fertilizer') returning id into pid;
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '50 kg', 1450, 1350) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 1290);
+insert into public.products (category_id, brand, name_en) values ((select id from public.categories where name_en = 'Fertilizers'), 'Coromandel', 'NPK 10-26-26 Complex Fertilizer') returning id into pid;
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '50 kg', 1550, 1470) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 1400);
+insert into public.products (category_id, brand, name_en) values ((select id from public.categories where name_en = 'Growth Boosters'), 'Multiplex', 'Multiplex Iron Micronutrient Mix') returning id into pid;
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '1 kg', 120, 110) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 98);
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '500 g', 70, 62) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 55);
+insert into public.products (category_id, brand, name_en) values ((select id from public.categories where name_en = 'Growth Boosters'), 'HPM Chemicals', 'HPM 24 Karat Gibberellic Acid') returning id into pid;
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '123 ml', 120, 111) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 99);
+insert into public.products (category_id, brand, name_en) values ((select id from public.categories where name_en = 'Growth Boosters'), 'Biofix', 'Biofix Libra Bio-Stimulant') returning id into pid;
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '50 ml', 180, 176) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 160);
+insert into public.products (category_id, brand, name_en) values ((select id from public.categories where name_en = 'Fungicides'), 'Aries', 'Plantomycin Antibacterial Fungicide') returning id into pid;
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '100 g', 150, 126) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 112);
+insert into public.products (category_id, brand, name_en) values ((select id from public.categories where name_en = 'Fungicides'), 'UPL', 'Saaf Carbendazim + Mancozeb Fungicide') returning id into pid;
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '250 g', 420, 380) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 345);
+insert into public.products (category_id, brand, name_en) values ((select id from public.categories where name_en = 'Crop Protection'), 'Katyayani', 'Katyayani Docter Insecticide Thiamethoxam') returning id into pid;
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '250 ml', 720, 530) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 480);
+insert into public.products (category_id, brand, name_en) values ((select id from public.categories where name_en = 'Crop Protection'), 'FMC', 'Corteva Liquid Novlect Herbicide') returning id into pid;
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '500 ml', 2250, 2179) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 2050);
+insert into public.products (category_id, brand, name_en) values ((select id from public.categories where name_en = 'Seeds'), 'Iris Seeds', 'Iris French Beans Seeds') returning id into pid;
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '15 Seeds', 299, 165) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 140);
+insert into public.products (category_id, brand, name_en) values ((select id from public.categories where name_en = 'Seeds'), 'Golden Hills', 'Hybrid Wheat Seeds High Yield') returning id into pid;
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '10 kg', 700, 650) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 590);
+insert into public.products (category_id, brand, name_en) values ((select id from public.categories where name_en = 'Farm Tools'), 'Kisan Tools', 'Manual Knapsack Sprayer 16L') returning id into pid;
+insert into public.pack_sizes (product_id, label, mrp, retail_price) values (pid, '1 pc', 1600, 1450) returning id into kid;
+insert into public.wholesale_prices (pack_id, price) values (kid, 1320);
+end $$;
